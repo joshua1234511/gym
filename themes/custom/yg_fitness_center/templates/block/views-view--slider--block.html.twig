@@ -1,0 +1,21 @@
+          
+<div class="flexslider">
+  <ul class="slides">
+        {% for result in view.result %}
+      <li>
+      <img src="{{ file_url(view.field.uri.value(view.result[loop.index-1])) }}" alt="Slider Banner" />
+        <div class="flex-caption">
+           <div class="col-md-12 intro-text">
+              <h1>{{ view.field.title.value(view.result[loop.index-1]) }}</h1>
+              <p>{{ view.field.body.value(view.result[loop.index-1]) |striptags }}</p>
+              {% if view.field.field_button_text.value(view.result[loop.index-1])|striptags %}
+              <a href="{{ view.field.field_button_link.value(view.result[loop.index-1]) |striptags }}" class="btn btn-custom white btn-lg page-scroll">{{ view.field.field_button_text.value(view.result[loop.index-1]) |striptags }}</a>
+              {% endif %}
+            </div>
+      </div>
+        </li>
+          {% endfor %}
+            </ul>
+    </div>
+
+

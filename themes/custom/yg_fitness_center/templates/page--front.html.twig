@@ -1,0 +1,129 @@
+{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{# Navbar #}
+{% if page.navigation or page.navigation_collapsible %}
+  {% block navbar %}
+    {%
+      set navbar_classes = [
+        'navbar',
+        theme.settings.navbar_inverse ? 'navbar-inverse' : 'navbar-default',
+        theme.settings.navbar_position ? 'navbar-' ~ theme.settings.navbar_position|clean_class : container,
+      ]
+    %}
+ <nav id="menu" class="navbar navbar-default navbar-fixed-top">   
+      {% if not navbar_attributes.hasClass(container) %}
+        <div class="{{ container }}">
+      {% endif %}
+      <div class="navbar-header">
+        {{ page.navigation }}
+
+        {# .btn-navbar is used as the toggle for collapsed navbar content #}
+        {% if page.navigation_collapsible %}
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+            <span class="sr-only">{{ 'Toggle navigation'|t }}</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        {% endif %}
+      </div>
+      {# Navigation (collapsible) #}
+      {% if page.navigation_collapsible %}
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+          {{ page.navigation_collapsible }}
+        </div>
+      {% endif %}
+      {% if not navbar_attributes.hasClass(container) %}
+        </div>
+      {% endif %}   
+  </nav>  
+  {% endblock %}
+{% endif %}
+</header>
+
+<!--End Header & Navbar -->
+<div class="main-content-wrap">
+  
+<!-- End Slider -->
+ <!-- Banner -->
+  {% if is_front and page.slider %}
+      {{ page.slider }}
+  {% endif %}
+  <!-- End Banner -->
+<div class="container">
+   {# Highlighted #}
+     {% if page.highlighted %}
+      {% block highlighted %}
+        <div class="highlighted col-md-7">{{ page.highlighted }}</div>
+      {% endblock %}
+     <div class="col-md-5"></div> 
+    {% endif %}
+</div>
+<!-- About Section -->
+<div id="about">
+  <div class="container">    
+      {{ page.about }}
+  </div>
+</div>
+<!-- Porfolio Section -->
+<div id="programs" class="text-center">
+  <div class="container">
+    <div class="programs-items">
+        {{ page.program }}
+    </div>
+  </div>
+</div>
+<!-- Trainers Section -->
+<div id="trainers" class="text-center">
+  <div class="container">
+        {{ page.trainer }}
+  </div>
+</div>
+<!-- Testimonials Section -->
+<div id="testimonials">
+  <div class="container">
+     <div class="col-sm-6 col-md-offset-6">
+      <div class="carousel-inner">
+     {{ page.testimonial }}
+     </div>
+     </div>
+  </div>
+</div>
+<!-- Membership Section -->
+<div id="membership" class="text-center">
+  <div class="container">
+    <div id="pricing-table" class="clear">
+        {{ page.membership_pricing }}
+    </div>
+  </div>
+</div>
+<!-- Contact Section -->
+<div id="contact" class="text-center">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+          {{ page.contact }}
+      </div>
+    </div>
+    <div class="col-md-12 contact-info">
+      <div class="contact-item col-md-4 ">
+        <p class="f_address"><span><i class="fa fa-map-marker"></i> Address</span>{{ address }}</p>
+      </div>
+      <div class="contact-item col-md-4">
+        <p><span><i class="fa fa-phone"></i> Phone</span> {{ phone }}</p>
+      </div>
+      <div class="contact-item col-md-4">
+        <p><span><i class="fa fa-envelope-o"></i> Email</span> {{ email }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer Section -->
+<div id="footer">
+  <div class="container text-center">
+    <p class="footer_fc">© 2018. All Rights Reserved.<br />
+Fitness Center Theme. Powered By <a href="http://www.youngglobes.com" target="_blank">Young Globes</a></p>
+  </div>
+</div>
+</div>
+
+

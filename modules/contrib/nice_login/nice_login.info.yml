@@ -1,0 +1,12 @@
+name: Nice Login
+type: module
+description: Provide nices pages for login user, create account and reset password
+# core: 8.x
+dependencies:
+  - drupal:user
+
+# Information added by Drupal.org packaging script on 2019-07-29
+version: '8.x-1.1'
+core: '8.x'
+project: 'nice_login'
+datestamp: 1564409587

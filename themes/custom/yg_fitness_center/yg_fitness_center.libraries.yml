@@ -1,0 +1,151 @@
+global-styling:
+  css:
+    theme:
+        css/style.css: {}
+        css/custom.css: {}
+        
+  js:
+    js/SmoothScroll.js: {}
+    js/main.js: {}
+    js/custom.js: {}  
+
+#Color palatte skin.......  
+fitness.skin.blue:
+  version: VERSION
+  css:
+    theme:
+      css/skins/blue/template.css: {}
+      css/skins/blue/bootstrap.css: {}
+
+fitness.skin.light_blue:
+  version: VERSION
+  css:
+    theme:
+      css/skins/light_blue/template.css: {}
+      css/skins/light_blue/bootstrap.css: {} 
+
+fitness.skin.brown:
+  version: VERSION
+  css:
+    theme:
+      css/skins/brown/template.css: {}
+      css/skins/brown/bootstrap.css: {}
+
+fitness.skin.green:
+  version: VERSION
+  css:
+    theme:
+      css/skins/green/template.css: {}
+      css/skins/green/bootstrap.css: {}
+
+fitness.skin.lilac:
+  version: VERSION
+  css:
+    theme:
+      css/skins/lilac/template.css: {}
+      css/skins/lilac/bootstrap.css: {} 
+
+fitness.skin.lime_green:
+  version: VERSION
+  css:
+    theme:
+      css/skins/lime_green/template.css: {}
+      css/skins/lime_green/bootstrap.css: {} 
+
+fitness.skin.orange:
+  version: VERSION
+  css:
+    theme:
+      css/skins/orange/template.css: {}
+      css/skins/orange/bootstrap.css: {}
+
+fitness.skin.pink:
+  version: VERSION
+  css:
+    theme:
+      css/skins/pink/template.css: {}
+      css/skins/pink/bootstrap.css: {} 
+
+fitness.skin.purple:
+  version: VERSION
+  css:
+    theme:
+      css/skins/purple/template.css: {}
+      css/skins/purple/bootstrap.css: {}
+
+fitness.skin.red:
+  version: VERSION
+  css:
+    theme:
+      css/skins/red/template.css: {}
+      css/skins/red/bootstrap.css: {}
+
+fitness.skin.turquoise:
+  version: VERSION
+  css:
+    theme:
+      css/skins/turquoise/template.css: {}
+      css/skins/turquoise/bootstrap.css: {} 
+
+fitness.skin.turquoise2:
+  version: VERSION
+  css:
+    theme:
+      css/skins/turquoise2/template.css: {}
+      css/skins/turquoise2/bootstrap.css: {} 
+
+fitness.skin.violet_red:
+  version: VERSION
+  css:
+    theme:
+      css/skins/violet_red/template.css: {}
+      css/skins/violet_red/bootstrap.css: {}
+
+fitness.skin.violet_red2:
+  version: VERSION
+  css:
+    theme:
+      css/skins/violet_red2/template.css: {}
+      css/skins/violet_red2/bootstrap.css: {} 
+
+fitness.skin.yellow:
+  version: VERSION
+  css:
+    theme:
+      css/skins/yellow/template.css: {}
+      css/skins/yellow/bootstrap.css: {} 
+#color palatte skin end....
+
+#bootstrap
+bootstrap:
+  version: VERSION
+  css:
+    base:
+      bootstrap/css/bootstrap.min.css: { weight: 0 }
+  js:
+    bootstrap/js/bootstrap.js: {}
+    
+fitness_admin:
+  version: VERSION
+  css:
+    theme:
+      css/theme-settings.css: {}
+
+# flexslider
+flexslider:
+  version: 1.x
+  css:
+    theme:
+      includes/flexslider/css/flexslider.css: {}
+  js:
+    includes/flexslider/js/jquery.flexslider-min.js: {}
+  dependencies:
+    - core/jquery
+
+#font-awesome
+font-awesome:
+  version: 1.x
+  css:
+    theme:
+      includes/fontawesome/css/font-awesome.css: {}
+

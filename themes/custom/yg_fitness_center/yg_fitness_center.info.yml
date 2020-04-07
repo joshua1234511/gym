@@ -1,0 +1,36 @@
+name: YG Fitness Center
+description: Fitness Center Theme in Drupal 8.
+core: 8.x
+type: theme
+base theme: classy
+screenshot: screeshot.png
+
+libraries:
+  - yg_fitness_center/bootstrap
+  - yg_fitness_center/flexslider
+  - yg_fitness_center/font-awesome
+  - yg_fitness_center/fitness-admin
+  - yg_fitness_center/global-styling
+
+regions:
+  # header: 'Header'
+  # main_menu: 'Main Menu'
+  
+  navigation: 'Navigation'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  
+  content: 'Content'
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
+  highlighted: 'Highlighted'
+  
+  slider: 'Slider'
+  about: 'About'
+  program: 'Programs'
+  trainer: 'Trainer'
+  testimonial: 'Testimonial'
+  membership_pricing: 'Membership Pricing'
+  contact: 'Contact'
+
+  copyright: 'Copyright'
+  footer: 'Footer'

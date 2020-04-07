@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @file
+ * Contains theme override functions and preprocess functions
+ */
+
+use Drupal\Core\Template\RenderWrapper;
+use Drupal\Core\Template\Attribute;
+use Drupal\search\Form\SearchBlockForm;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\system\Form\ThemeSettingsForm;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+use Drupal\file\Plugin\Core\Entity\FileInterface;
+
+/**
+ * Implements hook_preprocess_page() for block templates.
+ */
+function yg_fitness_center_preprocess_page(&$variables) {
+  $variables['address'] = theme_get_setting('address');
+  $variables['email'] = theme_get_setting('email');
+  $variables['phone'] = theme_get_setting('phone');
+  
+  
+}
+/**
+ * Implements hook_preprocess_menu().
+ */
+function yg_fitness_center_preprocess_menu(&$variables, $hook) {
+  if ($hook == 'menu__main') { // We're doing that for main menu.
+    // Get the current path.
+    $current_path = \Drupal::request()->getRequestUri();
+    $items = $variables['items'];
+    foreach ($items as $key => $item) {
+      // If path is current_path, set active to li.
+      if ($item['url']->toString() == $current_path) {
+      // Add active link.
+      $variables['items'][$key]['attributes']['class'] = 'active';
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_form_system_theme_settings_alter().
+ */
+function yg_fitness_center_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'yg_fitness_center/fitness_admin';
+  $form['core'] = array(
+    '#type' => 'vertical_tabs',
+    '#attributes' => array('class' => array('entity-meta')),
+    '#weight' => -899
+  );
+  $form['theme_settings']['#group'] = 'core';
+  $form['logo']['#group'] = 'core';
+  $form['favicon']['#group'] = 'core';
+  $form['theme_settings']['#open'] = FALSE;
+  $form['logo']['#open'] = FALSE;
+  $form['favicon']['#open'] = FALSE;
+  // Custom settings in Vertical Tabs container
+  $form['options'] = array(
+    '#type' => 'vertical_tabs',
+    '#attributes' => array('class' => array('entity-meta')),
+    '#weight' => -999,
+    '#default_tab' => 'edit-variables',
+    '#states' => array(
+      'invisible' => array(
+       ':input[name="force_subtheme_creation"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  //Customize color ----------------------------------
+  $form['options']['settings_customize'] = array(
+    '#type' => 'details',
+    '#attributes' => array(),
+    '#title' => t('Color Palatte'),
+    '#weight' => -997,
+    '#group' => 'options',
+    '#open' => TRUE,
+  );
+   $form['options']['settings_customize']['theme_skin'] = array(
+    '#type' => 'select',
+    '#title' => t('Theme Skin'),
+    '#default_value' => theme_get_setting('theme_skin'),
+    '#group' => 'settings',
+    '#options'      => array(
+      ''            => t('Default'),
+      'light_blue'  => t('Light Blue'),      
+      'blue'        => t('Blue'),
+      'brown'       => t('Brown'),
+      'green'       => t('Green'),
+      'lilac'       => t('Lilac'),
+      'lime_green'  => t('Lime Green'),
+      'orange'      => t('Orange'),
+      'pink'        => t('Pink'),
+      'purple'      => t('Purple'),
+      'red'         => t('Red'),
+      'turquoise'   => t('Turquoise'),
+      'turquoise2'  => t('Turquoise2'),
+      'violet_red'  => t('Violet Red'),
+      'violet_red2' => t('Violet Red2'),
+      'yellow'      => t('Yellow'),
+    ),
+  ); 
+
+//Address details
+$form['fitness_settings']['footer'] = array(
+    '#type' => 'details',
+    '#title' => t('Theme Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#group' => 'options',
+  );  
+  $form['fitness_settings']['footer']['address'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Address'),
+    '#default_value' => theme_get_setting('address'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    );
+  $form['fitness_settings']['footer']['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email ID'),
+    '#default_value' => theme_get_setting('email'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+   );
+ $form['fitness_settings']['footer']['phone'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Phone'),
+    '#default_value' => theme_get_setting('phone'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    );
+
+  $form['#submit'][] = 'yg_fitness_center_settings_form_submit';
+  }  
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function yg_fitness_center_preprocess_breadcrumb(&$variables){
+  if(($node = \Drupal::routeMatch()->getParameter('node')) && $variables['breadcrumb']){
+    $variables['breadcrumb'][] = array(
+     'text' => $node->getTitle(),
+     'url' => $node->URL()
+   );
+  }
+}
+
+function yg_fitness_center_preprocess_html(&$variables) {
+  global $theme;
+  $theme_path = drupal_get_path('theme', 'yg_fitness_center');
+
+  $current_url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+  $current_url = preg_replace('/([?&])display=[^&]+(&|$)/','$2',$current_url);
+  if(strpos($current_url, '?')){
+     $current_url .= '&';
+  }
+  else{
+     $current_url .= '?';
+  }
+  $variables['current_url'] = $current_url;
+  $skin = 'default';
+  $skin = theme_get_setting('theme_skin');
+  if(isset($_GET['color']) && $_GET['color']){
+    $skin = $_GET['color'];
+  }
+  if(empty($skin)){
+    $skin = 'default';
+  }
+  $variables['#attached']['library'][] = 'yg_fitness_center/fitness.skin.' . $skin;
+}
+function yg_fitness_center_settings_form_submit(&$form, &$form_state) {
+  
+}
